@@ -1,29 +1,40 @@
 class Solution {
+ public:
+  bool parseBoolExpr(string expression) {
+    int i = 0;
+    return parse(expression, i);
+  }
 
-char ind = 0;
-public:
-    bool parseBoolExpr(string exp) {
-        int n = exp.size();
-        
-        bool flag,ok=false;
-        stack<char> st;
-        while(i < n){         
-            if(exp[i] =='f' || exp[i] =='t'){
-                ind = check(st.top(),exp[i]);
-
-            }else if(exp[i] =='&' || exp[i] =='|' || exp[i] =='!'){
-                st.push(exp[i]);
-            }else if(exp[i] ==')'){
-                st.pop();
-                if(!st.empty()){
-                    ind = check(ind,st.top());
-                }
-            }
-        }
-        return ind;        
+ private:
+  bool parse(const string& exp, int& i) {
+    if (exp[i] == 't') {
+      ++i;
+      return true;
     }
-    private:
-    bool cheack(char syb,char c){
-        if(syb == '|'){ c=='f' ? ans = }
-    } 
+    if (exp[i] == 'f') {
+      ++i;
+      return false;
+    }
+    if (exp[i] == '!') {
+      i += 2;
+      bool ans = !parse(exp, i);
+      ++i;
+      return ans;
+    }
+
+    bool isAnd = exp[i] == '&';
+    bool ans = isAnd;
+    i += 2;
+    while (exp[i] != ')') {
+      bool parsed = parse(exp, i);
+      if (isAnd)
+        ans &= parsed;
+      else
+        ans |= parsed;
+      if (exp[i] == ',')
+        ++i;
+    }
+    ++i;
+    return ans;
+  }
 };
