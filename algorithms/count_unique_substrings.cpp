@@ -25,7 +25,7 @@ int count_unique_substrings(string const& s){
     for(int l=0; l<n; l++){
         unordered_set<long long> st;
         for(int i=0; i<=n-l; i++){ // or i+l<=n;
-            long long cur_h = ( ( ( hashes[i+l] + m - hashes[i] ) %m ) * p_pow[n-(i+l)] ) % m;
+            long long cur_h = ( ( ( hashes[i+l] + m - hashes[i] ) %m ) * p_pow[n-(i+l)] ) % m;//or p_pow[n-i+1)
             st.insert(cur_h);
         }
         cnt += st.size();
