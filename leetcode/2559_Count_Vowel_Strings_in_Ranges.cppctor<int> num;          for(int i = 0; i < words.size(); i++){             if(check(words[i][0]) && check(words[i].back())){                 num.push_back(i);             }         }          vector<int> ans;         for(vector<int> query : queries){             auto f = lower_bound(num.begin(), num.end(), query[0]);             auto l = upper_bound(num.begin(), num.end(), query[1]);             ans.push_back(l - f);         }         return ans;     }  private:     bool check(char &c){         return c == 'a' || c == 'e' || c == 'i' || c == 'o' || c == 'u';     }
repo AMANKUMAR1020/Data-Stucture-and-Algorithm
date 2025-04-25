@@ -1,0 +1,167 @@
+class Solution {
+public:
+    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& queries) {
+     vector<int> num;
+
+        for(int i = 0; i < words.size(); i++){
+            if(check(words[i][0]) && check(words[i].back())){
+                num.push_back(i);
+            }
+        }
+
+        vector<int> ans;
+        for(vector<int> query : queries){
+            auto f = lower_bound(num.begin(), num.end(), query[0]);
+            auto l = upper_bound(num.begin(), num.end(), query[1]);
+            ans.push_back(l - f);
+        }
+        return ans;
+    }
+
+private:
+    bool check(char &c){
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+};
+
+
+
+
+
+
+
+
+
+/*
+
+class Solution {
+public:
+    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& queries) {
+
+        vector<int> validIndices; // Store indices of valid words
+        int n = words.size();
+        
+        // Preprocess valid indices
+        for(int i = 0; i < n; i++) {
+            char first = words[i][0];
+            char last = words[i].back();
+            
+            if(isVowel(first) && isVowel(last)) {
+                validIndices.push_back(i);
+            }
+        }
+        
+        vector<int> ans;
+        for(auto& query : queries) {
+            int L = query[0];
+            int R = query[1];
+            
+            // Find first valid index >= L
+            auto lower = lower_bound(validIndices.begin(), validIndices.end(), L);
+            
+            // Find first valid index > R
+            auto upper = upper_bound(validIndices.begin(), validIndices.end(), R);
+            
+            ans.push_back(upper - lower);
+        }
+        return ans;
+    }
+
+private:
+    bool isVowel(char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+};
+
+
+class Solution {
+public:
+    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& queries) {
+        int n = words.size();
+        vector<int> num(n,0);
+        vector<int> ans;
+        for(int i=0; i<n; i++){
+
+            char f = words[i][0];
+            char l = words[i].back();
+
+            if(check(f) && check(l)){
+                num.push_back(i);
+            }
+        }
+        for(vector<int> query : queries){
+            int f = bs(query[0],num);
+            int l = bs(query[1],num);
+            bool f_b = f == query[0];
+            bool l_b = l == query[1];
+            
+            if(l_b){
+                ans.push_back(l - f + 1);
+            }else{
+                ans.push_back(l - f);
+            }
+        }
+        return ans;
+
+    }
+private:
+    bool check(char &c){
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+    int bs(int val, vector<int> &num){
+        int n = num.size();
+        int l = 0;
+        int h = n-1;
+
+        while(l<h){
+            int mid = h - (h+l)/2;
+            if(num[mid] <= val){
+                l = mid;
+            }
+            else{
+                h = mid + 1;
+            }
+        }
+        return l;
+
+    }
+};
+
+
+
+class Solution {
+public:
+    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& queries) {
+        int n = words.size();
+        vector<int> vec(n,0);
+        vector<int> ans;
+        for(int i=0; i<n; i++){
+            int m = words[i].size();
+            char f = words[i][0];
+            char l = words[i][m-1];
+
+            if(check(f) && check(l)){
+                vec[i] = 1;
+            }
+        }
+
+        int m = queries.size();
+        for(int j=0; j<m; j++){
+            
+            int f = queries[j][0];
+            int l = queries[j][1];
+            int temp = 0;
+            for(int i = f; i<=l; i++){
+                if(vec[i])
+                    temp++;
+            }
+            ans.push_back(temp);
+        }
+        return ans;
+    }
+private:
+    bool check(char c){
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+};
+*/
