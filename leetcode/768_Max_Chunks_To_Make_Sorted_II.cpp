@@ -1,4 +1,4 @@
-// this question is same as "768. Max Chunks To Make Sorted II"
+// this question is same as "7769. Max Chunks To Make Sorted"
 class Solution {
 public:
     int maxChunksToSorted(vector<int>& arr) {
