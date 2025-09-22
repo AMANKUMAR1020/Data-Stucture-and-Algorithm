@@ -28,4 +28,29 @@ class Solution {
 };
 
 
+// Alternative
+
+class Solution {
+  public:
+    int getKthFromLast(Node* head, int k) {
+        int cnt = 0;
+        Node *fst = head;
+        Node *sec = head;
+        
+        while(k--){
+            if(fst==nullptr)
+                return -1;
+            fst = fst->next;
+        }
+        
+        while(fst != nullptr){
+            fst = fst->next;
+            sec = sec->next;
+            cnt++;
+        }
+        return sec->data;
+    }
+};
+
+
 
