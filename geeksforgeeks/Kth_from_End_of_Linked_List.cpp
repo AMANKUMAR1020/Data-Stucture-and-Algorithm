@@ -7,6 +7,27 @@
   }
 };*/
 
+
+//method 1
+class Solution {
+  public:
+    int getKthFromLast(Node* head, int k) {
+        Node* curr = head;
+        int ans = -1;
+        queue<Node*> qu;
+        
+        while(curr != nullptr){
+            qu.push(curr);
+            if(qu.size() == k){
+                ans = qu.front()->data; qu.pop();
+            }
+            curr = curr->next;
+        }
+        return ans;
+    }
+};
+
+
 class Solution {
   public:
     int getKthFromLast(Node* head, int k) {
