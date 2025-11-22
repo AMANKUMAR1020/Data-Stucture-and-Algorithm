@@ -35,3 +35,18 @@ class Solution {
         return head;
     }
 };
+
+
+
+// method 2
+class Solution {
+  public:
+    Node *insertAtEnd(Node *head, int x) {
+        Node** curr = &head;
+        while(*curr != nullptr){
+            curr = &((*curr)->next);
+        }
+        *curr = new Node(x);
+        return head;
+    }
+};

@@ -10,6 +10,25 @@ class Node {
 
 }; */
 
+
+//method 2
+class Solution {
+  public:
+    int getMiddle(Node* head) {
+        Node* fast = head;
+        Node* slow = head;
+        while(fast->next && fast->next->next != nullptr){
+            // cout<<slow->data<<" "<<fast->data<<endl;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        // cout<<slow->data<<" "<<fast->data<<endl;
+        if(fast->next != nullptr)
+            slow = slow->next;
+        return slow->data;
+    }
+};
+
 class Solution {
   public:
     int getMiddle(Node* head) {
