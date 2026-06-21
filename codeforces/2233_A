@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+
+void solve() {
+    ll n, x, y, z;
+    cin >> n >> x >> y >> z;
+
+    // Nikita works from start
+    ll ans1 = (n + (x + y) - 1) / (x + y);
+
+    ll ans2;
+
+    // Can Maxim finish before AI setup ends?
+    ll finish_by_maxim = (n + x - 1) / x;
+
+    if (finish_by_maxim <= z) {
+        ans2 = finish_by_maxim;
+    } else {
+        ll written_during_setup = z * x;
+        ll remaining = n - written_during_setup;
+
+        ll extra =
+            (remaining + (x + 10 * y) - 1) / (x + 10 * y);
+
+        ans2 = z + extra;
+    }
+
+    cout << min(ans1, ans2) << '\n';
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+
+    while (t--) solve();
+}
